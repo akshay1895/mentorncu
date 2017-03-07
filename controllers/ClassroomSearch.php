@@ -1,16 +1,16 @@
 <?php
 
-namespace app\models;
+namespace app\controllers;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\User;
+use app\models\classroom;
 
 /**
- * UserSearch represents the model behind the search form about `app\models\User`.
+ * ClassroomSearch represents the model behind the search form about `app\models\classroom`.
  */
-class UserSearch extends User
+class ClassroomSearch extends classroom
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['user_id', 'role'], 'integer'],
-            [['password', 'fullname', 'email_id'], 'safe'],
+            [['class_id', 'mentor_id', 'stream', 'year', 'section'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = User::find();
+        $query = classroom::find();
 
         // add conditions that should always apply here
 
@@ -59,12 +58,12 @@ class UserSearch extends User
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'user_id' => $this->user_id,
-            'role' => $this->role,
+            'class_id' => $this->class_id,
+            'mentor_id' => $this->mentor_id,
+            'stream' => $this->stream,
+            'year' => $this->year,
+            'section' => $this->section,
         ]);
-
-        $query->andFilterWhere(['like', 'fullname', $this->fullname])
-            ->andFilterWhere(['like', 'email_id', $this->email_id]);
 
         return $dataProvider;
     }

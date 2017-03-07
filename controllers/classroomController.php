@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models;
+namespace app\controllers;
 
-class ClassController extends \yii\web\Controller
+class classroomController extends \yii\web\Controller
 {
     public function actionIndex()
     {
